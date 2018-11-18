@@ -1,0 +1,12 @@
+Zaimportuj do IntelliJ projekt jdbcExercise-template
+- Projekt dotyczy studentów i ich ocen
+- W klasach StudentDAO, StudentGradeDAO i SoftwareAcademyService znajdują
+się zadania ponumerowane o 1 do 15 wraz z opisem
+- Do każdej metody z w/w klas napisane są testy – po zaimplementowaniu metody
+wskazany w opisie test powinien zakończyć się sukcesem.
+- W ramach wykonywania zadań modyfikujemy implementacje metod w w/w
+klasach, nie w testach
+- Niektóre opisy zawierają linki do dokumentacji, aby do niej przejść, po
+najechaniu kursorem na link wciskamy Ctrl+B
+- Zadania wykonujemy zgodnie z ich numeracją
+- Po skończeniu zadań wszystkie testy powinny być zielone
