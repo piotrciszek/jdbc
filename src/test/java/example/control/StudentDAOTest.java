@@ -47,7 +47,7 @@ public class StudentDAOTest {
         Student expectedStudent = TestHelper.expectedStudentWithId1();
         Optional<Student> studentById = sut.findStudentById(1);
         Assertions.assertThat(studentById)
-                .isPresent()
+                 .isPresent()
                 .usingFieldByFieldValueComparator()
                 .contains(expectedStudent);
 

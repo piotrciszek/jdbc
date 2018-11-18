@@ -5,6 +5,7 @@ import example.entity.Student;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,11 @@ import java.util.Optional;
 /**
  * Created by krzysztof on 14.12.17.
  */
+
+/*
+Zadania wykonane przez piotr
+*/
+
 public class StudentDAO {
 
 
@@ -20,7 +26,26 @@ public class StudentDAO {
      * Po zaimplementowaniu sukcesem powinien konczyc sie test example.control.StudentDAOTest.testGetAllStudents
      */
     public List<Student> getAllStudents() throws IOException, SQLException {
-        return Collections.emptyList();
+        Connection connection = DatabaseConnectionProvider.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from student");
+            List<Student> students = new ArrayList<>();
+            while (resultSet.next()) {
+                Student student = createStudent(resultSet);
+                students.add(student);
+            }
+            return students;
+        }
+
+    private Student createStudent(ResultSet resultSet) throws SQLException {
+        Student student = new Student();
+        student.setId(resultSet.getInt("id"));
+        student.setAverageGrade(resultSet.getDouble("averagegrade"));
+        student.setName(resultSet.getString("name"));
+        student.setBirthday(new Date(resultSet.getDate("birthday").getTime()));
+        student.setPassword(resultSet.getString("password"));
+        student.setCity(resultSet.getString("city"));
+        return student;
     }
 
     /**
@@ -34,8 +59,16 @@ public class StudentDAO {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html#next--">resultSet#next()</a>
      **/
     public Optional<Student> findStudentById(Integer id) throws IOException, SQLException {
+        Connection connection = DatabaseConnectionProvider.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT *FROM student where id=1");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            Optional<Student> student = Optional.of(createStudent(resultSet));
+            return student;
+        }
         return Optional.empty();
     }
+
 
     /**
      * TODO: zad. 3 - Uzupelnij implementacje tak, aby metoda zwracała studenta o zadanym name i password
